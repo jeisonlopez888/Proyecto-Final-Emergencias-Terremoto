@@ -1,7 +1,6 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 3: PERSISTENCIA Y AUDITORÍA DE USUARIOS EN ARCHIVOS PLANOS (.TXT)
 # =====================================================================
 
 Code.require_file(Path.expand("estructuras.exs", __DIR__))

@@ -1,7 +1,6 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 1: STRUCTS Y MODELO DE DATOS DE LA EMERGENCIA (CON SEGURIDAD Y AUDITORÍA)
 # =====================================================================
 
 defmodule Usuario do

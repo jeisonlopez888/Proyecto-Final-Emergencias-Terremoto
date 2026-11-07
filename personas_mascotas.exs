@@ -1,7 +1,6 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 4: PERSONAS, MENSAJERÍA Y ALGORITMO DE MATCHING DE MASCOTAS
 # =====================================================================
 
 Code.require_file(Path.expand("estructuras.exs", __DIR__))

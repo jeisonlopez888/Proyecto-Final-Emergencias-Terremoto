@@ -1,7 +1,6 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 2: SERVIDOR CONCURRENTE CON GENSERVER (CON AUTENTICACIÓN, ZONAS Y AUDITORÍA)
 # =====================================================================
 
 Code.require_file(Path.expand("estructuras.exs", __DIR__))

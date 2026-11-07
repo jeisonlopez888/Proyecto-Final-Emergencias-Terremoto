@@ -1,7 +1,6 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 3: ÁRBOLES DE SUPERVISIÓN OTP (TOLERANCIA A FALLOS)
 # =====================================================================
 
 Code.require_file(Path.expand("servidor_emergencia.exs", __DIR__))

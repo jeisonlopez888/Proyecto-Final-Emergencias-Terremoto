@@ -1,7 +1,6 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 5: SISTEMA CENTRAL E INTERFAZ CLI INTUITIVA (SELECCIÓN POR NÚMEROS)
 # =====================================================================
 
 Code.require_file(Path.expand("estructuras.exs", __DIR__))
