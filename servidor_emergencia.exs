@@ -1,7 +1,7 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 2: SERVIDOR CONCURRENTE CON GENSERVER (CON AUTENTICACIÓN Y AUDITORÍA)
+# FASE 2: SERVIDOR CONCURRENTE CON GENSERVER (CON AUTENTICACIÓN, ZONAS Y AUDITORÍA)
 # =====================================================================
 
 Code.require_file(Path.expand("estructuras.exs", __DIR__))
@@ -10,10 +10,11 @@ Code.require_file(Path.expand("persistencia.exs", __DIR__))
 defmodule Emergencia.ServidorRecursos do
   @moduledoc """
   GenServer centralizado para la gestión concurrente, atómica y segura de:
-  1. Autenticación y Registro de Usuarios.
-  2. Recursos e Inventarios con auditoría del solicitante.
-  3. Albergues con control estricto de capacidad.
-  4. Necesidades vinculadas a usuarios.
+  1. Zonas Geográficas y su nivel de afectación.
+  2. Autenticación y Registro de Usuarios.
+  3. Recursos e Inventarios con auditoría del solicitante.
+  4. Albergues con control estricto de capacidad.
+  5. Necesidades vinculadas a usuarios.
   """
   use GenServer
 
@@ -24,6 +25,17 @@ defmodule Emergencia.ServidorRecursos do
   def start_link(opts \\ []) do
     nombre = Keyword.get(opts, :name, __MODULE__)
     GenServer.start_link(__MODULE__, :ok, name: nombre)
+  end
+
+  # --- GESTIÓN DE ZONAS ---
+
+  def registrar_zona(zona), do: registrar_zona(__MODULE__, zona)
+  def registrar_zona(servidor, %Zona{} = zona) do
+    GenServer.call(servidor, {:registrar_zona, zona})
+  end
+
+  def consultar_zonas(servidor \\ __MODULE__) do
+    GenServer.call(servidor, :consultar_zonas)
   end
 
   # --- AUTENTICACIÓN Y USUARIOS ---
@@ -109,12 +121,26 @@ defmodule Emergencia.ServidorRecursos do
   @impl true
   def init(:ok) do
     estado_inicial = %{
+      zonas: %{},
       usuarios: %{},
       recursos: %{},
       albergues: %{},
       necesidades: %{}
     }
     {:ok, estado_inicial}
+  end
+
+  # --- Handlers de Zonas ---
+
+  @impl true
+  def handle_call({:registrar_zona, %Zona{} = zona}, _from, estado) do
+    nuevo_mapa = Map.put(estado.zonas, zona.codigo, zona)
+    {:reply, {:ok, zona}, %{estado | zonas: nuevo_mapa}}
+  end
+
+  @impl true
+  def handle_call(:consultar_zonas, _from, estado) do
+    {:reply, Map.values(estado.zonas), estado}
   end
 
   # --- Handlers de Usuarios ---

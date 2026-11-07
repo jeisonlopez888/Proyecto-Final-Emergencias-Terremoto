@@ -9,6 +9,7 @@ Code.require_file(Path.expand("estructuras.exs", __DIR__))
 defmodule Emergencia.Persistencia do
   @moduledoc """
   Módulo de persistencia perezosa con Stream para guardar y cargar:
+  - zonas.txt
   - usuarios.txt
   - recursos.txt
   - albergues.txt
@@ -24,6 +25,47 @@ defmodule Emergencia.Persistencia do
     [linea]
     |> Stream.into(File.stream!(ruta, [:append]))
     |> Stream.run()
+  end
+
+  # --- GUARDAR / CARGAR ZONAS ---
+  def guardar_zonas(zonas, ruta \\ "zonas.txt") do
+    lineas =
+      zonas
+      |> Stream.map(fn %Zona{} = z ->
+        "#{z.codigo};#{z.nombre};#{z.nivel_afectacion};#{z.personas_afectadas}\n"
+      end)
+
+    lineas
+    |> Stream.into(File.stream!(ruta, [:write]))
+    |> Stream.run()
+
+    {:ok, Enum.count(zonas)}
+  end
+
+  def cargar_zonas(ruta \\ "zonas.txt") do
+    if File.exists?(ruta) do
+      zonas =
+        File.stream!(ruta)
+        |> Stream.map(&String.trim/1)
+        |> Stream.filter(&(&1 != "" and not String.starts_with?(&1, "#")))
+        |> Stream.map(fn linea ->
+          case String.split(linea, ";") do
+            [cod, nom, niv_str, pers_str] ->
+              pers = String.to_integer(pers_str)
+              case Zona.nueva(cod, nom, niv_str, pers) do
+                {:ok, z} -> z
+                _ -> nil
+              end
+            _ -> nil
+          end
+        end)
+        |> Stream.reject(&is_nil/1)
+        |> Enum.to_list()
+
+      {:ok, zonas}
+    else
+      {:ok, []}
+    end
   end
 
   # --- GUARDAR / CARGAR USUARIOS ---

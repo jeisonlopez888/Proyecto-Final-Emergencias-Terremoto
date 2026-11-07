@@ -1,0 +1,5 @@
+Z01;Zona 1 Sur;critico;500
+Z02;Zona 2 Norte;alto;350
+Z03;Zona 3 Oriente;medio;200
+Z04;Zona 4 Occidente;alto;400
+Z05;Zona 5 Centro;critico;600

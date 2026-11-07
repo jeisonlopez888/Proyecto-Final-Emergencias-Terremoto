@@ -1,1 +1,1 @@
-N0017;agua;20;alta;Z01;Jeison López;pendiente;Jeison López;SE SOLICITA 50 LITROS DE AGUA
+N0066;comida;20;alta;Z05;Jeison López;pendiente;Jeison López;se necesita 20 kits de comida
