@@ -377,7 +377,7 @@ defmodule SistemaEmergencia do
   # --- VISTAS Y MENÚS INTUITIVOS ---
 
   defp consultar_zonas_menu(estado_app) do
-    zonas = Emergencia.ServidorRecursos.consultar_zonas() |> Enum.sort_by(& &1.codigo)
+    zonas = Emergencia.ServidorRecursos.consultar_zonas() |> Enum.sort_by (& &1.codigo)
     IO.puts("\n=== ZONAS GEOGRÁFICAS DE LA CIUDAD Y AFECTACIÓN ===")
     Enum.each(zonas, fn z ->
       IO.puts("• [#{z.codigo}] #{z.nombre} | Nivel: :#{z.nivel_afectacion} | Afectados estimados: #{z.personas_afectadas} personas")
