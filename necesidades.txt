@@ -1,0 +1,1 @@
+N0090;comida;45;alta;Z01;pendiente;;
