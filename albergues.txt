@@ -1,1 +1,1 @@
-A01;Albergue Estadio;Z01;200;160
+A01;Albergue Estadio;Z01;200;200;Sistema;Jeison López

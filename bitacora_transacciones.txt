@@ -1,0 +1,8 @@
+[2026-11-07T02:33:11.625000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-07T02:33:11.703000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Kits Medicos) cantidad 150
+[2026-11-07T02:33:11.713000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Albergue Estadio) capacidad 200
+[2026-11-07T02:33:27.657000Z] | Usuario: Jeison López | Acción: LOGIN_EXITOSO | Detalle: Inicio de sesión correcto [jeison]
+[2026-11-07T02:37:18.340000Z] | Usuario: Jeison López | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (agua) cantidad 50
+[2026-11-07T02:38:55.485000Z] | Usuario: Jeison López | Acción: INGRESO_ALBERGUE_EXITOSO | Detalle: Ingresadas 40 personas a albergue Albergue Estadio (A01). Ocupacion: 200/200
+[2026-11-07T02:39:52.424000Z] | Usuario: Jeison López | Acción: REGISTRO_NECESIDAD | Detalle: Registrada necesidad N0017 (agua) cantidad 20 en zona Z01
+[2026-11-07T02:40:28.157000Z] | Usuario: Jeison López | Acción: GUARDAR_ESTADO | Detalle: Guardado manual del sistema en disco .txt

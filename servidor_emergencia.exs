@@ -1,17 +1,19 @@
 # =====================================================================
 # UNIVERSIDAD DEL QUINDÍO - PROGRAMACIÓN III (PROYECTO FINAL)
 # Autor: Jeison López
-# FASE 2: SERVIDOR CONCURRENTE CON GENSERVER (CORREGIDO)
+# FASE 2: SERVIDOR CONCURRENTE CON GENSERVER (CON AUTENTICACIÓN Y AUDITORÍA)
 # =====================================================================
 
 Code.require_file(Path.expand("estructuras.exs", __DIR__))
+Code.require_file(Path.expand("persistencia.exs", __DIR__))
 
 defmodule Emergencia.ServidorRecursos do
   @moduledoc """
-  GenServer centralizado para la gestión concurrente y atómica de:
-  1. Recursos e Inventarios (evita sobreasignación de stock).
-  2. Albergues (control estricto de capacidad máxima).
-  3. Necesidades (transición atómica de estados: :pendiente -> :asignada -> :atendida).
+  GenServer centralizado para la gestión concurrente, atómica y segura de:
+  1. Autenticación y Registro de Usuarios.
+  2. Recursos e Inventarios con auditoría del solicitante.
+  3. Albergues con control estricto de capacidad.
+  4. Necesidades vinculadas a usuarios.
   """
   use GenServer
 
@@ -24,40 +26,62 @@ defmodule Emergencia.ServidorRecursos do
     GenServer.start_link(__MODULE__, :ok, name: nombre)
   end
 
+  # --- AUTENTICACIÓN Y USUARIOS ---
+
+  def registrar_usuario(usuario), do: registrar_usuario(__MODULE__, usuario)
+  def registrar_usuario(servidor, %Usuario{} = usuario) do
+    GenServer.call(servidor, {:registrar_usuario, usuario})
+  end
+
+  def autenticar_usuario(username, password), do: autenticar_usuario(__MODULE__, username, password)
+  def autenticar_usuario(servidor, username, password) do
+    GenServer.call(servidor, {:autenticar_usuario, username, password})
+  end
+
+  def consultar_usuarios(servidor \\ __MODULE__) do
+    GenServer.call(servidor, :consultar_usuarios)
+  end
+
   # --- GESTIÓN DE RECURSOS ---
 
-  def registrar_recurso(recurso), do: registrar_recurso(__MODULE__, recurso)
-  def registrar_recurso(servidor, %Recurso{} = recurso) do
-    GenServer.call(servidor, {:registrar_recurso, recurso})
+  def registrar_recurso(recurso, usuario_nombre \\ "Sistema")
+  def registrar_recurso(%Recurso{} = recurso, usuario_nombre) when is_binary(usuario_nombre) do
+    registrar_recurso(__MODULE__, recurso, usuario_nombre)
+  end
+  def registrar_recurso(servidor, %Recurso{} = recurso, usuario_nombre) do
+    GenServer.call(servidor, {:registrar_recurso, recurso, usuario_nombre})
   end
 
   def consultar_recursos(servidor \\ __MODULE__) do
     GenServer.call(servidor, :consultar_recursos)
   end
 
-  def asignar_recurso(codigo_recurso, cantidad_solicitada) do
-    asignar_recurso(__MODULE__, codigo_recurso, cantidad_solicitada)
+  def asignar_recurso(codigo_recurso, cantidad_solicitada, usuario_nombre) do
+    asignar_recurso(__MODULE__, codigo_recurso, cantidad_solicitada, usuario_nombre)
   end
-  def asignar_recurso(servidor, codigo_recurso, cantidad_solicitada) do
-    GenServer.call(servidor, {:asignar_recurso, codigo_recurso, cantidad_solicitada})
+  def asignar_recurso(servidor, codigo_recurso, cantidad_solicitada, usuario_nombre) do
+    GenServer.call(servidor, {:asignar_recurso, codigo_recurso, cantidad_solicitada, usuario_nombre})
   end
 
   # --- GESTIÓN DE ALBERGUES ---
 
-  def registrar_albergue(albergue), do: registrar_albergue(__MODULE__, albergue)
-  def registrar_albergue(servidor, %Albergue{} = albergue) do
-    GenServer.call(servidor, {:registrar_albergue, albergue})
+  def registrar_albergue(albergue, usuario_nombre \\ "Sistema")
+  def registrar_albergue(%Albergue{} = albergue, usuario_nombre) when is_binary(usuario_nombre) do
+    registrar_albergue(__MODULE__, albergue, usuario_nombre)
+  end
+  def registrar_albergue(servidor, %Albergue{} = albergue, usuario_nombre) do
+    GenServer.call(servidor, {:registrar_albergue, albergue, usuario_nombre})
   end
 
   def consultar_albergues(servidor \\ __MODULE__) do
     GenServer.call(servidor, :consultar_albergues)
   end
 
-  def ingresar_albergue(codigo_albergue, cantidad_personas) do
-    ingresar_albergue(__MODULE__, codigo_albergue, cantidad_personas)
+  def ingresar_albergue(codigo_albergue, cantidad_personas, usuario_nombre) do
+    ingresar_albergue(__MODULE__, codigo_albergue, cantidad_personas, usuario_nombre)
   end
-  def ingresar_albergue(servidor, codigo_albergue, cantidad_personas) do
-    GenServer.call(servidor, {:ingresar_albergue, codigo_albergue, cantidad_personas})
+  def ingresar_albergue(servidor, codigo_albergue, cantidad_personas, usuario_nombre) do
+    GenServer.call(servidor, {:ingresar_albergue, codigo_albergue, cantidad_personas, usuario_nombre})
   end
 
   # --- GESTIÓN DE NECESIDADES ---
@@ -71,11 +95,11 @@ defmodule Emergencia.ServidorRecursos do
     GenServer.call(servidor, :consultar_necesidades)
   end
 
-  def cambiar_estado_necesidad(id_necesidad, nuevo_estado, responsable \\ "") do
-    cambiar_estado_necesidad(__MODULE__, id_necesidad, nuevo_estado, responsable)
+  def cambiar_estado_necesidad(id_necesidad, nuevo_estado, responsable, usuario_nombre) do
+    cambiar_estado_necesidad(__MODULE__, id_necesidad, nuevo_estado, responsable, usuario_nombre)
   end
-  def cambiar_estado_necesidad(servidor, id_necesidad, nuevo_estado, responsable) do
-    GenServer.call(servidor, {:cambiar_estado_necesidad, id_necesidad, nuevo_estado, responsable})
+  def cambiar_estado_necesidad(servidor, id_necesidad, nuevo_estado, responsable, usuario_nombre) do
+    GenServer.call(servidor, {:cambiar_estado_necesidad, id_necesidad, nuevo_estado, responsable, usuario_nombre})
   end
 
   # -------------------------------------------------------------------
@@ -85,6 +109,7 @@ defmodule Emergencia.ServidorRecursos do
   @impl true
   def init(:ok) do
     estado_inicial = %{
+      usuarios: %{},
       recursos: %{},
       albergues: %{},
       necesidades: %{}
@@ -92,12 +117,50 @@ defmodule Emergencia.ServidorRecursos do
     {:ok, estado_inicial}
   end
 
+  # --- Handlers de Usuarios ---
+
+  @impl true
+  def handle_call({:registrar_usuario, %Usuario{} = usuario}, _from, estado) do
+    case Map.get(estado.usuarios, usuario.username) do
+      nil ->
+        nuevo_mapa = Map.put(estado.usuarios, usuario.username, usuario)
+        Emergencia.Persistencia.registrar_auditoria(usuario.nombre, "REGISTRO_USUARIO", "Nuevo usuario registrado [#{usuario.username}] tipo #{usuario.tipo}")
+        {:reply, {:ok, usuario}, %{estado | usuarios: nuevo_mapa}}
+
+      _existente ->
+        {:reply, {:error, "El usuario con username '#{usuario.username}' ya existe"}, estado}
+    end
+  end
+
+  @impl true
+  def handle_call({:autenticar_usuario, username, password}, _from, estado) do
+    case Map.get(estado.usuarios, username) do
+      nil ->
+        {:reply, {:error, "Usuario no encontrado"}, estado}
+
+      %Usuario{password: ^password, activo: true} = u ->
+        Emergencia.Persistencia.registrar_auditoria(u.nombre, "LOGIN_EXITOSO", "Inicio de sesión correcto [#{username}]")
+        {:reply, {:ok, u}, estado}
+
+      %Usuario{password: _otra} ->
+        Emergencia.Persistencia.registrar_auditoria(username, "LOGIN_FALLIDO", "Contraseña incorrecta para usuario [#{username}]")
+        {:reply, {:error, "Contraseña incorrecta"}, estado}
+    end
+  end
+
+  @impl true
+  def handle_call(:consultar_usuarios, _from, estado) do
+    {:reply, Map.values(estado.usuarios), estado}
+  end
+
   # --- Handlers de Recursos ---
 
   @impl true
-  def handle_call({:registrar_recurso, %Recurso{} = recurso}, _from, estado) do
-    nuevo_mapa = Map.put(estado.recursos, recurso.codigo, recurso)
-    {:reply, {:ok, recurso}, %{estado | recursos: nuevo_mapa}}
+  def handle_call({:registrar_recurso, %Recurso{} = recurso, usuario_nombre}, _from, estado) do
+    recurso_con_autor = %{recurso | registrado_por: usuario_nombre, ultimo_modificador: usuario_nombre}
+    nuevo_mapa = Map.put(estado.recursos, recurso.codigo, recurso_con_autor)
+    Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "REGISTRO_RECURSO", "Registrado recurso #{recurso.codigo} (#{recurso.nombre}) cantidad #{recurso.cantidad}")
+    {:reply, {:ok, recurso_con_autor}, %{estado | recursos: nuevo_mapa}}
   end
 
   @impl true
@@ -106,17 +169,20 @@ defmodule Emergencia.ServidorRecursos do
   end
 
   @impl true
-  def handle_call({:asignar_recurso, codigo, cantidad}, _from, estado) do
+  def handle_call({:asignar_recurso, codigo, cantidad, usuario_nombre}, _from, estado) do
     case Map.get(estado.recursos, codigo) do
       nil ->
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "ASIGNACION_RECURSO_FALLIDA", "Recurso #{codigo} no existe")
         {:reply, {:error, "El recurso con código '#{codigo}' no existe"}, estado}
 
       %Recurso{cantidad: disponible} when disponible < cantidad ->
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "ASIGNACION_RECURSO_RECHAZADA", "Stock insuficiente de #{codigo}. Solicito: #{cantidad}, Disponible: #{disponible}")
         {:reply, {:error, "Stock insuficiente. Disponible: #{disponible}, solicitado: #{cantidad}"}, estado}
 
       %Recurso{} = recurso ->
-        recurso_actualizado = %{recurso | cantidad: recurso.cantidad - cantidad}
+        recurso_actualizado = %{recurso | cantidad: recurso.cantidad - cantidad, ultimo_modificador: usuario_nombre}
         nuevo_mapa = Map.put(estado.recursos, codigo, recurso_actualizado)
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "ASIGNACION_RECURSO_EXITOSA", "Asignados #{cantidad} de #{recurso.nombre} (#{codigo}). Quedan: #{recurso_actualizado.cantidad}")
         {:reply, {:ok, recurso_actualizado}, %{estado | recursos: nuevo_mapa}}
     end
   end
@@ -124,9 +190,11 @@ defmodule Emergencia.ServidorRecursos do
   # --- Handlers de Albergues ---
 
   @impl true
-  def handle_call({:registrar_albergue, %Albergue{} = albergue}, _from, estado) do
-    nuevo_mapa = Map.put(estado.albergues, albergue.codigo, albergue)
-    {:reply, {:ok, albergue}, %{estado | albergues: nuevo_mapa}}
+  def handle_call({:registrar_albergue, %Albergue{} = albergue, usuario_nombre}, _from, estado) do
+    albergue_con_autor = %{albergue | registrado_por: usuario_nombre, ultimo_modificador: usuario_nombre}
+    nuevo_mapa = Map.put(estado.albergues, albergue.codigo, albergue_con_autor)
+    Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "REGISTRO_ALBERGUE", "Registrado albergue #{albergue.codigo} (#{albergue.nombre}) capacidad #{albergue.capacidad_maxima}")
+    {:reply, {:ok, albergue_con_autor}, %{estado | albergues: nuevo_mapa}}
   end
 
   @impl true
@@ -135,18 +203,21 @@ defmodule Emergencia.ServidorRecursos do
   end
 
   @impl true
-  def handle_call({:ingresar_albergue, codigo, cantidad}, _from, estado) do
+  def handle_call({:ingresar_albergue, codigo, cantidad, usuario_nombre}, _from, estado) do
     case Map.get(estado.albergues, codigo) do
       nil ->
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "INGRESO_ALBERGUE_FALLIDO", "Albergue #{codigo} no existe")
         {:reply, {:error, "El albergue con código '#{codigo}' no existe"}, estado}
 
       %Albergue{ocupacion_actual: ocupacion, capacidad_maxima: max} when ocupacion + cantidad > max ->
         disponible = max - ocupacion
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "INGRESO_ALBERGUE_RECHAZADO", "Capacidad excedida en #{codigo}. Intento ingresar: #{cantidad}, Espacio: #{disponible}")
         {:reply, {:error, "Capacidad excedida en albergue '#{codigo}'. Espacio disponible: #{disponible}"}, estado}
 
       %Albergue{} = albergue ->
-        albergue_actualizado = %{albergue | ocupacion_actual: albergue.ocupacion_actual + cantidad}
+        albergue_actualizado = %{albergue | ocupacion_actual: albergue.ocupacion_actual + cantidad, ultimo_modificador: usuario_nombre}
         nuevo_mapa = Map.put(estado.albergues, codigo, albergue_actualizado)
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "INGRESO_ALBERGUE_EXITOSO", "Ingresadas #{cantidad} personas a albergue #{albergue.nombre} (#{codigo}). Ocupacion: #{albergue_actualizado.ocupacion_actual}/#{albergue_actualizado.capacidad_maxima}")
         {:reply, {:ok, albergue_actualizado}, %{estado | albergues: nuevo_mapa}}
     end
   end
@@ -156,6 +227,7 @@ defmodule Emergencia.ServidorRecursos do
   @impl true
   def handle_call({:registrar_necesidad, %Necesidad{} = necesidad}, _from, estado) do
     nuevo_mapa = Map.put(estado.necesidades, necesidad.id, necesidad)
+    Emergencia.Persistencia.registrar_auditoria(necesidad.solicitado_por, "REGISTRO_NECESIDAD", "Registrada necesidad #{necesidad.id} (#{necesidad.tipo}) cantidad #{necesidad.cantidad} en zona #{necesidad.zona_codigo}")
     {:reply, {:ok, necesidad}, %{estado | necesidades: nuevo_mapa}}
   end
 
@@ -165,7 +237,7 @@ defmodule Emergencia.ServidorRecursos do
   end
 
   @impl true
-  def handle_call({:cambiar_estado_necesidad, id, nuevo_estado, responsable}, _from, estado) do
+  def handle_call({:cambiar_estado_necesidad, id, nuevo_estado, responsable, usuario_nombre}, _from, estado) do
     case Map.get(estado.necesidades, id) do
       nil ->
         {:reply, {:error, "La necesidad con ID '#{id}' no existe"}, estado}
@@ -173,6 +245,7 @@ defmodule Emergencia.ServidorRecursos do
       %Necesidad{} = necesidad ->
         necesidad_actualizada = %{necesidad | estado: nuevo_estado, responsable: responsable}
         nuevo_mapa = Map.put(estado.necesidades, id, necesidad_actualizada)
+        Emergencia.Persistencia.registrar_auditoria(usuario_nombre, "CAMBIO_ESTADO_NECESIDAD", "Necesidad #{id} cambio a estado :#{nuevo_estado} (Responsable: #{responsable})")
         {:reply, {:ok, necesidad_actualizada}, %{estado | necesidades: nuevo_mapa}}
     end
   end
