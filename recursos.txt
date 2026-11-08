@@ -1,6 +1,5 @@
 R01;Agua Potable 5L;Hidratación;100;botellones;Estadio Centenario;Sistema;Sistema
 R02;Kits de Primeros Auxilios;Salud;50;cajas;Auditorio Cruz Roja;Sistema;Sistema
-R03;Cobijas y Frazadas;Abrigo;180;unidades;Coliseo del Café;Sistema;Jeison López
+R03;Cobijas y Frazadas;Abrigo;200;unidades;Coliseo del Café;Sistema;Sistema
 R04;Raciones de Comida no Perecedera;Alimentación;150;paquetes;Bodega de la Catedral;Sistema;Sistema
 R05;Colchonetas Térmicas;Refugio;60;unidades;CAI Parque de la Constitución;Sistema;Sistema
-R06;cobijas y frazadas;Refugio / Abrigo;50;unidades;Auditorio Cruz Roja;Jeison López;Jeison López

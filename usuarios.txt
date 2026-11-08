@@ -1,2 +1,1 @@
 jeison;1234;Jeison López;coordinador;Zona 5 Centro;true
-mari;1234;mariana lopez;ciudadano;Zona 3 Oriente;true

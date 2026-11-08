@@ -57,10 +57,10 @@ defmodule SistemaEmergencia do
     # 1. Iniciar Árbol de Supervisión OTP
     case Emergencia.Supervisor.start_link() do
       {:ok, _pid} ->
-        IO.puts("[OTP] Árbol de Supervisión activado exitosamente (:one_for_one).")
+       IO.puts("Árbol de Supervisión activado exitosamente")
 
       {:error, {:already_started, _pid}} ->
-        IO.puts("[OTP] Árbol de Supervisión ya activo.")
+        IO.puts("Árbol de Supervisión ya activo.")
     end
 
     # 2. Cargar estado e inicializar datos predefinidos
@@ -71,8 +71,7 @@ defmodule SistemaEmergencia do
   end
 
   defp cargar_datos_disco do
-    IO.puts("[Persistencia] Inicializando y sincronizando catálogo de datos...")
-
+    
     # Zonas
     {:ok, zonas_cargadas} = Emergencia.Persistencia.cargar_zonas()
     zonas_finales =
@@ -137,7 +136,7 @@ defmodule SistemaEmergencia do
     num_r = Enum.count(Emergencia.ServidorRecursos.consultar_recursos())
     num_n = Enum.count(necesidades_cargadas)
 
-    IO.puts("[OK] Datos listos: #{num_z} zonas, #{num_a} albergues/acopios, #{num_r} recursos, #{num_u} usuarios, #{num_n} necesidades.\n")
+    IO.puts("Datos listos: #{num_z} zonas, #{num_a} albergues/acopios, #{num_r} recursos, #{num_u} usuarios, #{num_n} necesidades.\n")
   end
 
   # -------------------------------------------------------------------
@@ -376,7 +375,7 @@ defmodule SistemaEmergencia do
   # --- VISTAS Y MENÚS INTUITIVOS ---
 
   defp consultar_zonas_menu(estado_app) do
-    zonas = Emergencia.ServidorRecursos.consultar_zonas() |> Enum.sort_by (& &1.codigo)
+    zonas = Emergencia.ServidorRecursos.consultar_zonas() |> Enum.sort_by(& &1.codigo)
     IO.puts("\n=== ZONAS GEOGRÁFICAS DE LA CIUDAD Y AFECTACIÓN ===")
     Enum.each(zonas, fn z ->
       IO.puts("• [#{z.codigo}] #{z.nombre} | Nivel: :#{z.nivel_afectacion} | Afectados estimados: #{z.personas_afectadas} personas")

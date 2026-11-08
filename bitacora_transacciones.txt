@@ -1,20 +1,66 @@
-[2026-11-07T03:13:00.964000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
-[2026-11-07T03:13:00.976000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
-[2026-11-07T03:13:00.977000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
-[2026-11-07T03:13:00.979000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
-[2026-11-07T03:13:00.981000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
-[2026-11-07T03:13:00.985000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
-[2026-11-07T03:13:00.994000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
-[2026-11-07T03:13:00.997000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
-[2026-11-07T03:13:00.998000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
-[2026-11-07T03:13:00.999000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
-[2026-11-07T03:13:01.002000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
-[2026-11-07T03:14:28.623000Z] | Usuario: mariana lopez | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [mari] tipo ciudadano
-[2026-11-07T03:14:44.310000Z] | Usuario: Jeison López | Acción: LOGIN_EXITOSO | Detalle: Inicio de sesión correcto [jeison]
-[2026-11-07T03:16:20.429000Z] | Usuario: Jeison López | Acción: ASIGNACION_RECURSO_EXITOSA | Detalle: Asignados 20 de Cobijas y Frazadas (R03). Quedan: 180
-[2026-11-07T03:17:40.590000Z] | Usuario: Jeison López | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R06 (cobijas y frazadas) cantidad 50
-[2026-11-07T03:18:37.511000Z] | Usuario: Jeison López | Acción: INGRESO_ALBERGUE_EXITOSO | Detalle: Ingresadas 60 personas a albergue Estadio Centenario (A01). Ocupacion: 60/300
-[2026-11-07T03:19:41.514000Z] | Usuario: Jeison López | Acción: REGISTRO_NECESIDAD | Detalle: Registrada necesidad N0066 (comida) cantidad 20 en zona Z05
-[2026-11-07T03:20:45.022000Z] | Usuario: Jeison López | Acción: REGISTRO_MASCOTA_PERDIDA | Detalle: ID: M0035, Nombre: kay, Especie: perro
-[2026-11-07T03:22:14.121000Z] | Usuario: Jeison López | Acción: REGISTRO_MASCOTA_ENCONTRADA | Detalle: ID: M0087, Especie: perro
-[2026-11-07T03:22:23.406000Z] | Usuario: Jeison López | Acción: GUARDAR_ESTADO | Detalle: Guardado manual del sistema en disco .txt
+[2026-11-08T23:30:25.091000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-08T23:30:25.108000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-08T23:30:25.110000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-08T23:30:25.111000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-08T23:30:25.114000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-08T23:30:25.115000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-08T23:30:25.129000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-08T23:30:25.138000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-08T23:30:25.138000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-08T23:30:25.138000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-08T23:30:25.138000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-08T23:35:52.128000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-08T23:35:52.142000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-08T23:35:52.143000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-08T23:35:52.143000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-08T23:35:52.145000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-08T23:35:52.146000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-08T23:35:52.151000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-08T23:35:52.151000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-08T23:35:52.156000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-08T23:35:52.156000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-08T23:35:52.156000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-08T23:39:17.490000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-08T23:39:17.490000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-08T23:39:17.490000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-08T23:39:17.490000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-08T23:39:17.490000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-08T23:39:17.490000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-08T23:39:17.507000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-08T23:39:17.508000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-08T23:39:17.509000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-08T23:39:17.509000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-08T23:39:17.509000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-08T23:41:20.057000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-08T23:41:20.057000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-08T23:41:20.057000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-08T23:41:20.057000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-08T23:41:20.057000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-08T23:41:20.057000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-08T23:41:20.073000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-08T23:41:20.085000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-08T23:41:20.086000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-08T23:41:20.086000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-08T23:41:20.086000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-08T23:42:40.370000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-08T23:42:40.374000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-08T23:43:44.107000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-08T23:43:44.114000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-08T23:43:44.114000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-08T23:43:44.114000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-08T23:43:44.114000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-08T23:43:44.114000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-08T23:43:44.114000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-08T23:43:44.123000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-08T23:43:44.125000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-08T23:43:44.125000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-08T23:43:44.125000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
