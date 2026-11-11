@@ -111,7 +111,7 @@ defmodule Emergencia.ServidorRecursos do
   end
 
   @impl true
-  def handle_call({:registrar_zona, %Zona{} = z}, _from, estado) do
+  def handle_call({:registrar_zona, %{__struct__: Zona} = z}, _from, estado) do
     {:reply, {:ok, z}, %{estado | zonas: Map.put(estado.zonas, z.codigo, z)}}
   end
 
@@ -119,7 +119,7 @@ defmodule Emergencia.ServidorRecursos do
   def handle_call(:consultar_zonas, _from, estado), do: {:reply, Map.values(estado.zonas), estado}
 
   @impl true
-  def handle_call({:registrar_usuario, %Usuario{} = u}, _from, estado) do
+  def handle_call({:registrar_usuario, %{__struct__: Usuario} = u}, _from, estado) do
     case Map.get(estado.usuarios, u.username) do
       nil -> {:reply, {:ok, u}, %{estado | usuarios: Map.put(estado.usuarios, u.username, u)}}
       _ -> {:reply, {:error, "Usuario ya existe"}, estado}
@@ -129,7 +129,7 @@ defmodule Emergencia.ServidorRecursos do
   @impl true
   def handle_call({:autenticar_usuario, username, password}, _from, estado) do
     case Map.get(estado.usuarios, username) do
-      %Usuario{password: ^password} = u -> {:reply, {:ok, u}, estado}
+      %{__struct__: Usuario, password: ^password} = u -> {:reply, {:ok, u}, estado}
       _ -> {:reply, {:error, "Credenciales inválidas"}, estado}
     end
   end
@@ -139,7 +139,7 @@ defmodule Emergencia.ServidorRecursos do
     do: {:reply, Map.values(estado.usuarios), estado}
 
   @impl true
-  def handle_call({:registrar_recurso, %Recurso{} = r, u_nom}, _from, estado) do
+  def handle_call({:registrar_recurso, %{__struct__: Recurso} = r, u_nom}, _from, estado) do
     r_aut = %{r | registrado_por: u_nom, ultimo_modificador: u_nom}
     {:reply, {:ok, r_aut}, %{estado | recursos: Map.put(estado.recursos, r.codigo, r_aut)}}
   end
@@ -154,17 +154,17 @@ defmodule Emergencia.ServidorRecursos do
       nil ->
         {:reply, {:error, "Recurso inexistente"}, estado}
 
-      %Recurso{cantidad: disp} when disp < cant ->
+      %{__struct__: Recurso, cantidad: disp} when disp < cant ->
         {:reply, {:error, "Stock insuficiente"}, estado}
 
-      %Recurso{} = r ->
+      %{__struct__: Recurso} = r ->
         r_act = %{r | cantidad: r.cantidad - cant, ultimo_modificador: u_nom}
         {:reply, {:ok, r_act}, %{estado | recursos: Map.put(estado.recursos, cod, r_act)}}
     end
   end
 
   @impl true
-  def handle_call({:registrar_albergue, %Albergue{} = a, u_nom}, _from, estado) do
+  def handle_call({:registrar_albergue, %{__struct__: Albergue} = a, u_nom}, _from, estado) do
     a_aut = %{a | registrado_por: u_nom, ultimo_modificador: u_nom}
     {:reply, {:ok, a_aut}, %{estado | albergues: Map.put(estado.albergues, a.codigo, a_aut)}}
   end
@@ -179,17 +179,17 @@ defmodule Emergencia.ServidorRecursos do
       nil ->
         {:reply, {:error, "Albergue inexistente"}, estado}
 
-      %Albergue{ocupacion_actual: ocu, capacidad_maxima: max} when ocu + cant > max ->
+      %{__struct__: Albergue, ocupacion_actual: ocu, capacidad_maxima: max} when ocu + cant > max ->
         {:reply, {:error, "Capacidad excedida"}, estado}
 
-      %Albergue{} = a ->
+      %{__struct__: Albergue} = a ->
         a_act = %{a | ocupacion_actual: a.ocupacion_actual + cant, ultimo_modificador: u_nom}
         {:reply, {:ok, a_act}, %{estado | albergues: Map.put(estado.albergues, cod, a_act)}}
     end
   end
 
   @impl true
-  def handle_call({:registrar_necesidad, %Necesidad{} = n}, _from, estado) do
+  def handle_call({:registrar_necesidad, %{__struct__: Necesidad} = n}, _from, estado) do
     {:reply, {:ok, n}, %{estado | necesidades: Map.put(estado.necesidades, n.id, n)}}
   end
 
@@ -199,7 +199,7 @@ defmodule Emergencia.ServidorRecursos do
 
   # --- HANDLERS PERSONAS ---
   @impl true
-  def handle_call({:registrar_persona, %Persona{} = p}, _from, estado) do
+  def handle_call({:registrar_persona, %{__struct__: Persona} = p}, _from, estado) do
     {:reply, {:ok, p}, %{estado | personas: Map.put(estado.personas, p.documento, p)}}
   end
 
@@ -233,7 +233,7 @@ defmodule Emergencia.ServidorRecursos do
       nil ->
         {:reply, {:error, "Persona con documento '#{doc}' no encontrada"}, estado}
 
-      %Persona{} = p ->
+      %{__struct__: Persona} = p ->
         ts = DateTime.utc_now() |> DateTime.to_iso8601()
 
         p_act = %{
@@ -248,7 +248,7 @@ defmodule Emergencia.ServidorRecursos do
 
   # --- HANDLERS MENSAJES ---
   @impl true
-  def handle_call({:registrar_mensaje, %MensajeFamiliar{} = m}, _from, estado) do
+  def handle_call({:registrar_mensaje, %{__struct__: MensajeFamiliar} = m}, _from, estado) do
     {:reply, {:ok, m}, %{estado | mensajes: Map.put(estado.mensajes, m.id, m)}}
   end
 
@@ -268,7 +268,7 @@ defmodule Emergencia.ServidorRecursos do
       nil ->
         {:reply, {:error, "Mensaje inexistente"}, estado}
 
-      %MensajeFamiliar{} = m ->
+      %{__struct__: MensajeFamiliar} = m ->
         m_act = %{m | estado: nuevo_est}
         {:reply, {:ok, m_act}, %{estado | mensajes: Map.put(estado.mensajes, id, m_act)}}
     end

@@ -35,7 +35,7 @@ defmodule Emergencia.Persistencia do
   def guardar_zonas(zonas, ruta \\ "zonas.txt") do
     lineas =
       zonas
-      |> Stream.map(fn %Zona{} = z ->
+      |> Stream.map(fn %{__struct__: Zona} = z ->
         "#{z.codigo};#{z.nombre};#{z.nivel_afectacion};#{z.personas_afectadas}\n"
       end)
 
@@ -79,7 +79,7 @@ defmodule Emergencia.Persistencia do
   def guardar_usuarios(usuarios, ruta \\ "usuarios.txt") do
     lineas =
       usuarios
-      |> Stream.map(fn %Usuario{} = u ->
+      |> Stream.map(fn %{__struct__: Usuario} = u ->
         "#{u.username};#{u.password};#{u.nombre};#{u.tipo};#{u.zona_principal};#{u.activo}\n"
       end)
 
@@ -123,7 +123,7 @@ defmodule Emergencia.Persistencia do
   def guardar_recursos(recursos, ruta \\ "recursos.txt") do
     lineas =
       recursos
-      |> Stream.map(fn %Recurso{} = r ->
+      |> Stream.map(fn %{__struct__: Recurso} = r ->
         "#{r.codigo};#{r.nombre};#{r.categoria};#{r.cantidad};#{r.unidad};#{r.ubicacion};#{r.registrado_por};#{r.ultimo_modificador}\n"
       end)
 
@@ -169,7 +169,7 @@ defmodule Emergencia.Persistencia do
   def guardar_albergues(albergues, ruta \\ "albergues.txt") do
     lineas =
       albergues
-      |> Stream.map(fn %Albergue{} = a ->
+      |> Stream.map(fn %{__struct__: Albergue} = a ->
         "#{a.codigo};#{a.nombre};#{a.zona_codigo};#{a.capacidad_maxima};#{a.ocupacion_actual};#{a.registrado_por};#{a.ultimo_modificador}\n"
       end)
 
@@ -217,7 +217,7 @@ defmodule Emergencia.Persistencia do
   def guardar_necesidades(necesidades, ruta \\ "necesidades.txt") do
     lineas =
       necesidades
-      |> Stream.map(fn %Necesidad{} = n ->
+      |> Stream.map(fn %{__struct__: Necesidad} = n ->
         "#{n.id};#{n.tipo};#{n.cantidad};#{n.prioridad};#{n.zona_codigo};#{n.solicitado_por};#{n.estado};#{n.responsable};#{n.descripcion}\n"
       end)
 
@@ -260,7 +260,7 @@ defmodule Emergencia.Persistencia do
   def guardar_personas(personas, ruta \\ "personas.txt") do
     lineas =
       personas
-      |> Stream.map(fn %Persona{} = p ->
+      |> Stream.map(fn %{__struct__: Persona} = p ->
         hist_str =
           p.historial_estados |> Enum.map(fn {est, ts} -> "#{est}@#{ts}" end) |> Enum.join("|")
 
@@ -320,7 +320,7 @@ defmodule Emergencia.Persistencia do
   def guardar_mensajes(mensajes, ruta \\ "mensajes_familiares.txt") do
     lineas =
       mensajes
-      |> Stream.map(fn %MensajeFamiliar{} = m ->
+      |> Stream.map(fn %{__struct__: MensajeFamiliar} = m ->
         "#{m.id};#{m.remitente};#{m.destinatario_doc};#{m.estado};#{m.fecha};#{m.contenido}\n"
       end)
 

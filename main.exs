@@ -255,7 +255,7 @@ defmodule SistemaEmergencia do
     password = IO.gets("Contraseña: ") |> String.trim()
 
     case Emergencia.ServidorRecursos.autenticar_usuario(username, password) do
-      {:ok, %Usuario{} = u} ->
+      {:ok, %{__struct__: Usuario} = u} ->
         IO.puts("\n[ACCESO CONCEDIDO] Bienvenido/a #{u.nombre} [Rol: #{u.tipo}]")
         despachar_menu_por_rol(%{estado_app | usuario: u})
 
@@ -295,13 +295,13 @@ defmodule SistemaEmergencia do
   end
 
   # --- ENRUTADOR POR ROL ---
-  defp despachar_menu_por_rol(%{usuario: %Usuario{tipo: :ciudadano}} = estado_app),
+  defp despachar_menu_por_rol(%{usuario: %{__struct__: Usuario, tipo: :ciudadano}} = estado_app),
     do: menu_ciudadano(estado_app)
 
-  defp despachar_menu_por_rol(%{usuario: %Usuario{tipo: :voluntario}} = estado_app),
+  defp despachar_menu_por_rol(%{usuario: %{__struct__: Usuario, tipo: :voluntario}} = estado_app),
     do: menu_voluntario(estado_app)
 
-  defp despachar_menu_por_rol(%{usuario: %Usuario{tipo: t}} = estado_app)
+  defp despachar_menu_por_rol(%{usuario: %{__struct__: Usuario, tipo: t}} = estado_app)
        when t in [:coordinador, :administrador], do: menu_coordinador(estado_app)
 
   # --- 1. MENÚ CIUDADANO ---
