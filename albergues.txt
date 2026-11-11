@@ -3,3 +3,5 @@ A02;Coliseo del Café;Z02;250;0;Sistema;Sistema
 A03;Bodega de la Catedral;Z05;150;0;Sistema;Sistema
 A04;Auditorio Cruz Roja;Z04;100;0;Sistema;Sistema
 A05;CAI Parque de la Constitución;Z03;80;0;Sistema;Sistema
+A06;san jose;Z02;500;0;mariana lopez;mariana lopez
+A07;coliceo la patria;Z03;120;0;Jeison López;Jeison López

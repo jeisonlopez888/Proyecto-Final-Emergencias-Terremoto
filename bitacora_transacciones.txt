@@ -64,3 +64,28 @@
 [2026-11-08T23:43:44.125000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
 [2026-11-08T23:43:44.125000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
 [2026-11-08T23:43:44.125000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-11T01:27:57.823000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-11T01:27:57.857000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-11T01:27:57.858000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-11T01:27:57.859000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-11T01:27:57.862000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-11T01:27:57.862000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-11T01:27:57.883000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-11T01:27:57.885000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-11T01:27:57.886000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-11T01:27:57.887000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-11T01:27:57.888000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-11T01:28:32.747000Z] | Usuario: Jeison López | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [jeison] tipo coordinador
+[2026-11-11T01:28:32.791000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A01 (Estadio Centenario) capacidad 300
+[2026-11-11T01:28:32.792000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A02 (Coliseo del Café) capacidad 250
+[2026-11-11T01:28:32.800000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A03 (Bodega de la Catedral) capacidad 150
+[2026-11-11T01:28:32.806000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A04 (Auditorio Cruz Roja) capacidad 100
+[2026-11-11T01:28:32.813000Z] | Usuario: Sistema | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A05 (CAI Parque de la Constitución) capacidad 80
+[2026-11-11T01:28:32.821000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R01 (Agua Potable 5L) cantidad 100
+[2026-11-11T01:28:32.822000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R02 (Kits de Primeros Auxilios) cantidad 50
+[2026-11-11T01:28:32.823000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R03 (Cobijas y Frazadas) cantidad 200
+[2026-11-11T01:28:32.823000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R04 (Raciones de Comida no Perecedera) cantidad 150
+[2026-11-11T01:28:32.824000Z] | Usuario: Sistema | Acción: REGISTRO_RECURSO | Detalle: Registrado recurso R05 (Colchonetas Térmicas) cantidad 60
+[2026-11-11T01:30:28.732000Z] | Usuario: mariana lopez | Acción: REGISTRO_USUARIO | Detalle: Nuevo usuario registrado [mariana] tipo ciudadano
+[2026-11-11T01:30:57.444000Z] | Usuario: mariana lopez | Acción: LOGIN_EXITOSO | Detalle: Inicio de sesión correcto [mariana]
+[2026-11-11T01:32:18.786000Z] | Usuario: mariana lopez | Acción: REGISTRO_ALBERGUE | Detalle: Registrado albergue A06 (san jose) capacidad 500

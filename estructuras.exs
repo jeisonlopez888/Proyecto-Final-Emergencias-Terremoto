@@ -24,14 +24,15 @@ defmodule Usuario do
         {:error, "Tipo de usuario inválido. Permitidos: #{@tipos_validos |> Enum.join(", ")}"}
 
       true ->
-        {:ok, %__MODULE__{
-          username: String.trim(username),
-          password: String.trim(password),
-          nombre: String.trim(nombre),
-          tipo: tipo_atomo,
-          zona_principal: zona_principal,
-          activo: true
-        }}
+        {:ok,
+         %__MODULE__{
+           username: String.trim(username),
+           password: String.trim(password),
+           nombre: String.trim(nombre),
+           tipo: tipo_atomo,
+           zona_principal: zona_principal,
+           activo: true
+         }}
     end
   rescue
     ArgumentError -> {:error, "Tipo de usuario no reconocido"}
@@ -58,13 +59,14 @@ defmodule Zona do
         {:error, "La cantidad de personas afectadas no puede ser negativa"}
 
       true ->
-        {:ok, %__MODULE__{
-          codigo: codigo,
-          nombre: nombre,
-          nivel_afectacion: nivel_at,
-          personas_afectadas: personas,
-          sectores: []
-        }}
+        {:ok,
+         %__MODULE__{
+           codigo: codigo,
+           nombre: nombre,
+           nivel_afectacion: nivel_at,
+           personas_afectadas: personas,
+           sectores: []
+         }}
     end
   rescue
     ArgumentError -> {:error, "Nivel de afectación no reconocido"}
@@ -79,7 +81,8 @@ defmodule Sector do
     if codigo == "" or nombre == "" or zona_codigo == "" do
       {:error, "Datos incompletos para crear el sector"}
     else
-      {:ok, %__MODULE__{codigo: codigo, nombre: nombre, zona_codigo: zona_codigo, puntos_atencion: []}}
+      {:ok,
+       %__MODULE__{codigo: codigo, nombre: nombre, zona_codigo: zona_codigo, puntos_atencion: []}}
     end
   end
 end
@@ -92,7 +95,13 @@ defmodule PuntoAtencion do
     if codigo == "" or nombre == "" do
       {:error, "Código o nombre de punto de atención vacíos"}
     else
-      {:ok, %__MODULE__{codigo: codigo, nombre: nombre, sector_codigo: sector_codigo, personas_atendidas: 0}}
+      {:ok,
+       %__MODULE__{
+         codigo: codigo,
+         nombre: nombre,
+         sector_codigo: sector_codigo,
+         personas_atendidas: 0
+       }}
     end
   end
 end
@@ -100,13 +109,29 @@ end
 defmodule Necesidad do
   @enforce_keys [:id, :tipo, :cantidad, :prioridad, :zona_codigo, :solicitado_por]
   defstruct [
-    :id, :tipo, :cantidad, :prioridad, :zona_codigo, :solicitado_por,
-    :descripcion, :responsable, estado: :pendiente
+    :id,
+    :tipo,
+    :cantidad,
+    :prioridad,
+    :zona_codigo,
+    :solicitado_por,
+    :descripcion,
+    :responsable,
+    estado: :pendiente
   ]
 
   @prioridades [:critica, :alta, :media, :baja]
 
-  def nueva(id, tipo, cantidad, prioridad, zona_codigo, solicitado_por, descripcion \\ "", responsable \\ "") do
+  def nueva(
+        id,
+        tipo,
+        cantidad,
+        prioridad,
+        zona_codigo,
+        solicitado_por,
+        descripcion \\ "",
+        responsable \\ ""
+      ) do
     prio_at = if is_binary(prioridad), do: String.to_existing_atom(prioridad), else: prioridad
 
     cond do
@@ -120,17 +145,18 @@ defmodule Necesidad do
         {:error, "Prioridad de necesidad inválida"}
 
       true ->
-        {:ok, %__MODULE__{
-          id: id,
-          tipo: tipo,
-          cantidad: cantidad,
-          prioridad: prio_at,
-          zona_codigo: zona_codigo,
-          solicitado_por: solicitado_por,
-          descripcion: descripcion,
-          responsable: responsable,
-          estado: :pendiente
-        }}
+        {:ok,
+         %__MODULE__{
+           id: id,
+           tipo: tipo,
+           cantidad: cantidad,
+           prioridad: prio_at,
+           zona_codigo: zona_codigo,
+           solicitado_por: solicitado_por,
+           descripcion: descripcion,
+           responsable: responsable,
+           estado: :pendiente
+         }}
     end
   rescue
     ArgumentError -> {:error, "Prioridad no reconocida"}
@@ -139,7 +165,16 @@ end
 
 defmodule Recurso do
   @enforce_keys [:codigo, :nombre, :categoria, :cantidad, :unidad, :ubicacion]
-  defstruct [:codigo, :nombre, :categoria, :cantidad, :unidad, :ubicacion, registrado_por: "Sistema", ultimo_modificador: "Sistema"]
+  defstruct [
+    :codigo,
+    :nombre,
+    :categoria,
+    :cantidad,
+    :unidad,
+    :ubicacion,
+    registrado_por: "Sistema",
+    ultimo_modificador: "Sistema"
+  ]
 
   def nuevo(codigo, nombre, categoria, cantidad, unidad, ubicacion, registrado_por \\ "Sistema") do
     cond do
@@ -150,16 +185,17 @@ defmodule Recurso do
         {:error, "La cantidad del recurso no puede ser negativa"}
 
       true ->
-        {:ok, %__MODULE__{
-          codigo: codigo,
-          nombre: nombre,
-          categoria: categoria,
-          cantidad: cantidad,
-          unidad: unidad,
-          ubicacion: ubicacion,
-          registrado_por: registrado_por,
-          ultimo_modificador: registrado_por
-        }}
+        {:ok,
+         %__MODULE__{
+           codigo: codigo,
+           nombre: nombre,
+           categoria: categoria,
+           cantidad: cantidad,
+           unidad: unidad,
+           ubicacion: ubicacion,
+           registrado_por: registrado_por,
+           ultimo_modificador: registrado_por
+         }}
     end
   end
 end
@@ -168,7 +204,14 @@ defmodule Persona do
   @enforce_keys [:documento, :nombre, :zona_codigo]
   defstruct [:documento, :nombre, :edad, :zona_codigo, estado: :reportada, historial_estados: []]
 
-  @estados_validos [:sin_informacion, :reportada, :localizada, :trasladada, :en_albergue, :reunificada]
+  @estados_validos [
+    :sin_informacion,
+    :reportada,
+    :localizada,
+    :trasladada,
+    :en_albergue,
+    :reunificada
+  ]
 
   def nueva(documento, nombre, zona_codigo, edad \\ 0, estado \\ :reportada) do
     est_at = if is_binary(estado), do: String.to_existing_atom(estado), else: estado
@@ -182,14 +225,16 @@ defmodule Persona do
 
       true ->
         timestamp = DateTime.utc_now() |> DateTime.to_iso8601()
-        {:ok, %__MODULE__{
-          documento: documento,
-          nombre: nombre,
-          zona_codigo: zona_codigo,
-          edad: edad,
-          estado: est_at,
-          historial_estados: [{est_at, timestamp}]
-        }}
+
+        {:ok,
+         %__MODULE__{
+           documento: documento,
+           nombre: nombre,
+           zona_codigo: zona_codigo,
+           edad: edad,
+           estado: est_at,
+           historial_estados: [{est_at, timestamp}]
+         }}
     end
   rescue
     ArgumentError -> {:error, "Estado de persona no reconocido"}
@@ -204,27 +249,57 @@ defmodule MensajeFamiliar do
     if id == "" or remitente == "" or destinatario_doc == "" or contenido == "" do
       {:error, "Campos obligatorios de mensaje vacíos"}
     else
-      {:ok, %__MODULE__{
-        id: id,
-        remitente: remitente,
-        destinatario_doc: destinatario_doc,
-        contenido: contenido,
-        fecha: DateTime.utc_now() |> DateTime.to_iso8601(),
-        estado: :pendiente
-      }}
+      {:ok,
+       %__MODULE__{
+         id: id,
+         remitente: remitente,
+         destinatario_doc: destinatario_doc,
+         contenido: contenido,
+         fecha: DateTime.utc_now() |> DateTime.to_iso8601(),
+         estado: :pendiente
+       }}
     end
   end
 end
 
 defmodule Mascota do
-  @enforce_keys [:id, :tipo_reporte, :especie, :caracteristicas, :zona_codigo, :contacto, :registrado_por]
+  @enforce_keys [
+    :id,
+    :tipo_reporte,
+    :especie,
+    :caracteristicas,
+    :zona_codigo,
+    :contacto,
+    :registrado_por
+  ]
   defstruct [
-    :id, :tipo_reporte, :especie, :nombre, :caracteristicas,
-    :color, :tamano, :zona_codigo, :contacto, :registrado_por, estado: :activa
+    :id,
+    :tipo_reporte,
+    :especie,
+    :nombre,
+    :caracteristicas,
+    :color,
+    :tamano,
+    :zona_codigo,
+    :contacto,
+    :registrado_por,
+    estado: :activa
   ]
 
-  def nueva(id, tipo_reporte, especie, nombre, caracteristicas, color, tamano, zona_codigo, contacto, registrado_por \\ "Sistema") do
-    tipo_at = if is_binary(tipo_reporte), do: String.to_existing_atom(tipo_reporte), else: tipo_reporte
+  def nueva(
+        id,
+        tipo_reporte,
+        especie,
+        nombre,
+        caracteristicas,
+        color,
+        tamano,
+        zona_codigo,
+        contacto,
+        registrado_por \\ "Sistema"
+      ) do
+    tipo_at =
+      if is_binary(tipo_reporte), do: String.to_existing_atom(tipo_reporte), else: tipo_reporte
 
     cond do
       id == "" or contacto == "" or zona_codigo == "" ->
@@ -234,19 +309,20 @@ defmodule Mascota do
         {:error, "Tipo de reporte debe ser :perdida o :encontrada"}
 
       true ->
-        {:ok, %__MODULE__{
-          id: id,
-          tipo_reporte: tipo_at,
-          especie: String.downcase(especie),
-          nombre: nombre,
-          caracteristicas: String.downcase(caracteristicas),
-          color: String.downcase(color),
-          tamano: String.downcase(tamano),
-          zona_codigo: zona_codigo,
-          contacto: contacto,
-          registrado_por: registrado_por,
-          estado: :activa
-        }}
+        {:ok,
+         %__MODULE__{
+           id: id,
+           tipo_reporte: tipo_at,
+           especie: String.downcase(especie),
+           nombre: nombre,
+           caracteristicas: String.downcase(caracteristicas),
+           color: String.downcase(color),
+           tamano: String.downcase(tamano),
+           zona_codigo: zona_codigo,
+           contacto: contacto,
+           registrado_por: registrado_por,
+           estado: :activa
+         }}
     end
   rescue
     ArgumentError -> {:error, "Tipo de reporte no reconocido"}
@@ -255,7 +331,15 @@ end
 
 defmodule Albergue do
   @enforce_keys [:codigo, :nombre, :zona_codigo, :capacidad_maxima]
-  defstruct [:codigo, :nombre, :zona_codigo, :capacidad_maxima, ocupacion_actual: 0, registrado_por: "Sistema", ultimo_modificador: "Sistema"]
+  defstruct [
+    :codigo,
+    :nombre,
+    :zona_codigo,
+    :capacidad_maxima,
+    ocupacion_actual: 0,
+    registrado_por: "Sistema",
+    ultimo_modificador: "Sistema"
+  ]
 
   def nuevo(codigo, nombre, zona_codigo, capacidad_maxima, registrado_por \\ "Sistema") do
     cond do
@@ -266,15 +350,16 @@ defmodule Albergue do
         {:error, "La capacidad máxima del albergue debe ser un entero positivo"}
 
       true ->
-        {:ok, %__MODULE__{
-          codigo: codigo,
-          nombre: nombre,
-          zona_codigo: zona_codigo,
-          capacidad_maxima: capacidad_maxima,
-          ocupacion_actual: 0,
-          registrado_por: registrado_por,
-          ultimo_modificador: registrado_por
-        }}
+        {:ok,
+         %__MODULE__{
+           codigo: codigo,
+           nombre: nombre,
+           zona_codigo: zona_codigo,
+           capacidad_maxima: capacidad_maxima,
+           ocupacion_actual: 0,
+           registrado_por: registrado_por,
+           ultimo_modificador: registrado_por
+         }}
     end
   end
 end
