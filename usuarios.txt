@@ -1,2 +1,3 @@
 jeison;1234;Jeison López;coordinador;Zona 5 Centro;true
+jhon jairo;1234;jhon jairo lopez;voluntario;Zona 5 Centro;true
 mariana;1234;mariana lopez;ciudadano;Zona 2 Norte;true

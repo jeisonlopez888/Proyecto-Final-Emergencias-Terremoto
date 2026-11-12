@@ -50,8 +50,8 @@ defmodule SistemaEmergencia do
     """)
 
     case Emergencia.Supervisor.start_link() do
-      {:ok, _pid} -> IO.puts("[OTP] Árbol de Supervisión activado exitosamente (:one_for_one).")
-      {:error, {:already_started, _pid}} -> IO.puts("[OTP] Árbol de Supervisión ya activo.")
+      {:ok, _pid} -> IO.puts(" ")
+      {:error, {:already_started, _pid}} -> IO.puts(" ")
     end
 
     cargar_datos_disco()
@@ -59,7 +59,7 @@ defmodule SistemaEmergencia do
   end
 
   defp cargar_datos_disco do
-    IO.puts("[Persistencia] Inicializando y sincronizando catálogo de datos...")
+    IO.puts(" ")
 
     {:ok, z_carg} = Emergencia.Persistencia.cargar_zonas()
 
@@ -251,7 +251,7 @@ defmodule SistemaEmergencia do
 
   defp iniciar_sesion(estado_app) do
     IO.puts("\n--- INICIO DE SESIÓN ---")
-    username = IO.gets("ingrese su nombre de usuario: ") |> String.trim() |> String.downcase()
+    username = IO.gets("Nombre de Usuario: ") |> String.trim() |> String.downcase()
     password = IO.gets("Contraseña: ") |> String.trim()
 
     case Emergencia.ServidorRecursos.autenticar_usuario(username, password) do
@@ -267,7 +267,7 @@ defmodule SistemaEmergencia do
 
   defp registrar_usuario_menu(estado_app) do
     IO.puts("\n--- REGISTRO DE USUARIO ---")
-    usr = IO.gets("Username: ") |> String.trim() |> String.downcase()
+    usr = IO.gets("Nombre de Usuario: ") |> String.trim() |> String.downcase()
     pwd = IO.gets("Contraseña: ") |> String.trim()
     nom = IO.gets("Nombre Completo: ") |> String.trim()
     IO.puts("Rol: 1. Ciudadano | 2. Voluntario | 3. Coordinador")
@@ -315,8 +315,8 @@ defmodule SistemaEmergencia do
     1. Ver Zonas de la Ciudad
     2. Consultar Albergues
     3. Solicitar Necesidad de Emergencia
-    4. Buscar Persona Afectada / Ver Mensajes (1.4.6)
-    5. Dejar Mensaje Familiar a Persona (1.4.6)
+    4. Buscar Persona Afectada / Ver Mensajes
+    5. Dejar Mensaje Familiar a Persona
     6. Mascotas Perdidas/Encontradas
     7. Cerrar Sesión
     8. Salir
@@ -369,10 +369,10 @@ defmodule SistemaEmergencia do
     1. Ver Zonas de la Ciudad
     2. Consultar Recursos
     3. Ingresar Personas a Albergue
-    4. Registrar Persona en Censo (1.4.6)
-    5. Actualizar Estado de Persona Afectada (1.4.6)
+    4. Registrar Persona en Censo
+    5. Actualizar Estado de Persona Afectada
     6. Registrar Necesidad
-    7. Ver y Gestionar Mensajes Familiares (1.4.6)
+    7. Ver y Gestionar Mensajes Familiares
     8. Mascotas
     9. Cerrar Sesión
     10. Salir
@@ -435,11 +435,11 @@ defmodule SistemaEmergencia do
     3. Asignar Recurso a Emergencia
     4. Registrar Nuevo Recurso
     5. Ver y Crear Albergues
-    6. Censo Completo de Personas Afectadas y Control de Estados (1.4.6)
-    7. Central de Mensajería Familiar (1.4.6)
+    6. Censo Completo de Personas Afectadas y Control de Estados
+    7. Central de Mensajería Familiar
     8. Registrar Necesidad
     9. Mascotas
-    10. Guardar Estado en Disco (.txt)
+    10. Guardar Estado en Disco
     11. Ver Bitácora de Transacciones / Auditoría
     12. Cerrar Sesión
     13. Salir
@@ -648,7 +648,7 @@ defmodule SistemaEmergencia do
   end
 
   defp censo_coordinador_menu do
-    IO.puts("\n=== GESTIÓN GLOBAL DEL CENSO DE PERSONAS (1.4.6) ===")
+    IO.puts("\n=== GESTIÓN GLOBAL DEL CENSO DE PERSONAS ===")
     IO.puts("  1. Buscar Persona / Ver Historial y Mensajes")
     IO.puts("  2. Registrar Nueva Persona Afectada")
     IO.puts("  3. Cambiar Estado de Persona Afectada")

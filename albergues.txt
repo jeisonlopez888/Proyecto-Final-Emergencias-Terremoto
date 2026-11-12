@@ -1,4 +1,4 @@
-A01;Estadio Centenario;Z01;300;0;Sistema;Sistema
+A01;Estadio Centenario;Z01;300;100;Sistema;jhon jairo lopez
 A02;Coliseo del Café;Z02;250;0;Sistema;Sistema
 A03;Bodega de la Catedral;Z05;150;0;Sistema;Sistema
 A04;Auditorio Cruz Roja;Z04;100;0;Sistema;Sistema

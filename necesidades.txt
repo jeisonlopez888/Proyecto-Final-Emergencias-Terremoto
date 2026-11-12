@@ -1,1 +1,2 @@
 N0026;comida;40;alta;Z03;mariana lopez;pendiente;mariana lopez;se solicita agua
+N0027;refugio;5;alta;Z02;jhon jairo lopez;pendiente;jhon jairo lopez;se solicita cupo en albergue para 5 personas
