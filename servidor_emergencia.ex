@@ -4,8 +4,6 @@
 # FASE 2: SERVIDOR CONCURRENTE CON GENSERVER
 # =====================================================================
 
-Code.require_file(Path.expand("estructuras.exs", __DIR__))
-Code.require_file(Path.expand("persistencia.exs", __DIR__))
 
 defmodule Emergencia.ServidorRecursos do
   @moduledoc """

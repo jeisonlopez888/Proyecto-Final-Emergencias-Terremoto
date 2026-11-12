@@ -3,7 +3,6 @@
 # Autor: Jeison López
 # =====================================================================
 
-Code.require_file(Path.expand("estructuras.exs", __DIR__))
 
 defmodule Emergencia.GestionPersonas do
   @moduledoc """

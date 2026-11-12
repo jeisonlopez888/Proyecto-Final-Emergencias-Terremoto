@@ -4,7 +4,6 @@
 # FASE 3: PERSISTENCIA Y AUDITORÍA EN ARCHIVOS PLANOS (.TXT)
 # =====================================================================
 
-Code.require_file(Path.expand("estructuras.exs", __DIR__))
 
 defmodule Emergencia.Persistencia do
   @moduledoc """

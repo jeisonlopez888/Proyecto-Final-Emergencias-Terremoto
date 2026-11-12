@@ -3,7 +3,6 @@
 # Autor: Jeison López
 # =====================================================================
 
-Code.require_file(Path.expand("servidor_emergencia.exs", __DIR__))
 
 defmodule Emergencia.Supervisor do
   @moduledoc """
