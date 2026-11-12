@@ -3,12 +3,12 @@
 # Autor: Jeison López
 # =====================================================================
 
-Code.require_file(Path.expand("estructuras.exs", __DIR__))
-Code.require_file(Path.expand("servidor_emergencia.exs", __DIR__))
-Code.require_file(Path.expand("persistencia.exs", __DIR__))
-Code.require_file(Path.expand("supervisor.exs", __DIR__))
-Code.require_file(Path.expand("jerarquia_zonas.exs", __DIR__))
-Code.require_file(Path.expand("personas_mascotas.exs", __DIR__))
+Code.require_file(Path.expand("estructuras.ex", __DIR__))
+Code.require_file(Path.expand("servidor_emergencia.ex", __DIR__))
+Code.require_file(Path.expand("persistencia.ex", __DIR__))
+Code.require_file(Path.expand("supervisor.ex", __DIR__))
+Code.require_file(Path.expand("jerarquia_zonas.ex", __DIR__))
+Code.require_file(Path.expand("personas_mascotas.ex", __DIR__))
 
 defmodule SistemaEmergencia do
   @moduledoc """
@@ -648,7 +648,7 @@ defmodule SistemaEmergencia do
   end
 
   defp censo_coordinador_menu do
-    IO.puts("\n=== GESTIÓN GLOBAL DEL CENSO DE PERSONAS ===")
+    IO.puts("\n=== GESTIÓN GLOBAL DEL CENSO DE PERSONAS  ===")
     IO.puts("  1. Buscar Persona / Ver Historial y Mensajes")
     IO.puts("  2. Registrar Nueva Persona Afectada")
     IO.puts("  3. Cambiar Estado de Persona Afectada")
